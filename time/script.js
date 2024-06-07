@@ -11,7 +11,7 @@ function getCurrentTimestamp() {
 
     // Copy the current timestamp to clipboard
     navigator.clipboard.writeText(now).then(() => {
-        alert('Timestamp copied to clipboard!');
+
     }).catch(err => {
         alert('Failed to copy timestamp.');
     });
