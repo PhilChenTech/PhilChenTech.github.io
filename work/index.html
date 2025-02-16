@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>上下班倒數計時</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-color: #f4f4f4;
+    }
+    .container {
+      text-align: center;
+    }
+    .countdown, .clock {
+      font-size: 2rem;
+      padding: 20px;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      margin: 10px;
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <div class="clock" id="clock">現在時間: --:--:--</div>
+  <div class="countdown" id="countdown">計算中...</div>
+</div>
+<script>
+  function updateClock() {
+    const now = new Date();
+    const hours = String(now.getHours()).padStart(2, '0');
+    const minutes = String(now.getMinutes()).padStart(2, '0');
+    const seconds = String(now.getSeconds()).padStart(2, '0');
+    document.getElementById("clock").innerText = `現在時間: ${hours}:${minutes}:${seconds}`;
+  }
+
+  function updateCountdown() {
+    const now = new Date();
+    let targetTime = new Date();
+    let day = now.getDay(); // 取得星期幾 (0:星期日, 1:星期一, ..., 6:星期六)
+
+    if (now.getHours() >= 18) {
+      // 超過 18:00，計算下次上班時間 (隔天 9:00)
+      targetTime.setDate(targetTime.getDate() + 1);
+      targetTime.setHours(9, 0, 0, 0);
+
+      // 如果隔天是週六或週日，則設定為下個星期一 9:00
+      if (day === 5) targetTime.setDate(targetTime.getDate() + 2); // 週五 -> 週一
+      if (day === 6) targetTime.setDate(targetTime.getDate() + 1); // 週六 -> 週一
+    } else {
+      // 未超過 18:00，計算當日下班時間
+      targetTime.setHours(18, 0, 0, 0);
+    }
+
+    const diff = targetTime - now;
+    const hours = Math.floor(diff / (1000 * 60 * 60));
+    const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+    document.getElementById("countdown").innerText = now.getHours() >= 18
+            ? `距離上班還有 ${hours} 小時 ${minutes} 分 ${seconds} 秒`
+            : `距離下班還有 ${hours} 小時 ${minutes} 分 ${seconds} 秒`;
+  }
+
+  updateClock();
+  updateCountdown();
+  setInterval(updateClock, 1000);
+  setInterval(updateCountdown, 1000);
+</script>
+</body>
+</html>
