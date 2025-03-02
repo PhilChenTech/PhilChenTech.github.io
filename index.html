@@ -1,10 +1,67 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-TW">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>兔田建設</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f9;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      flex-direction: column;
+      color: #333;
+    }
+    h1 {
+      color: #2a9d8f;
+      font-size: 36px;
+      margin-bottom: 20px;
+    }
+    .links {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+    .link-item {
+      background-color: #264653;
+      color: white;
+      padding: 15px;
+      text-align: center;
+      border-radius: 8px;
+      text-decoration: none;
+      font-size: 18px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      transition: background-color 0.3s ease;
+    }
+    .link-item:hover {
+      background-color: #2a9d8f;
+    }
+    footer {
+      position: absolute;
+      bottom: 20px;
+      font-size: 14px;
+      color: #aaa;
+    }
+  </style>
 </head>
 <body>
-國國國國國國國國國國國國國國國國國國國國國國國國國國
+
+<h1>工具箱</h1>
+<div class="links">
+  <a href="https://philchentech.github.io/work/" class="link-item" target="_blank">上下班倒數計時</a>
+  <a href="https://philchentech.github.io/uuid-generator/" class="link-item" target="_blank">UUID產生器</a>
+  <a href="https://philchentech.github.io/time" class="link-item" target="_blank">Timestamp工具</a>
+</div>
+
+<footer>
+  <p>© 兔田建設 | 所有權利保留</p>
+</footer>
+
 </body>
 </html>
