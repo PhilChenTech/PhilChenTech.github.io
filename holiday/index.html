@@ -3,51 +3,92 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>2025 中華民國國定假日</title>
+  <title>2025 國定假日日曆</title>
 
   <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            appleBlack: "#121212",
+            appleBlue: "#007aff",
+            appleGray: "#d1d1d1",
+          },
+          fontFamily: {
+            sans: ["-apple-system", "BlinkMacSystemFont", "Helvetica Neue", "sans-serif"],
+          },
+        },
+      },
+    };
+  </script>
 
   <!-- FullCalendar -->
   <link href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/main.min.css" rel="stylesheet" />
   <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.js"></script>
+
+  <style>
+    /* 客製化 FullCalendar 字體與顏色 */
+    .fc {
+      font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", sans-serif;
+      background-color: white;
+      border-radius: 1rem;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    }
+
+    .fc-toolbar-title {
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: #121212;
+    }
+
+    .fc-daygrid-event {
+      background-color: #007aff !important;
+      border: none;
+      border-radius: 0.5rem;
+      padding: 2px 6px;
+      font-size: 0.75rem;
+    }
+
+    .fc-col-header-cell-cushion {
+      font-weight: 500;
+    }
+  </style>
 </head>
-<body class="bg-gray-900 text-white font-sans">
 
-<div class="max-w-4xl mx-auto px-4 py-10">
-  <h1 class="text-3xl md:text-5xl font-bold text-center mb-8 text-teal-400">
-    2025 中華民國國定假日
-  </h1>
+<body class="bg-gradient-to-b from-gray-100 to-gray-200 text-black min-h-screen flex items-center justify-center p-4">
+<div class="w-full max-w-5xl">
+  <div class="text-center mb-6">
+    <h1 class="text-4xl font-semibold text-gray-900 tracking-tight">2025 中華民國國定假日</h1>
+    <p class="text-gray-500 mt-2 text-sm">資料來源：行政院人事行政總處</p>
+  </div>
 
-  <div id="calendar" class="bg-white rounded-xl text-black p-4 shadow-lg"></div>
-
-  <p class="text-sm text-gray-400 text-center mt-6">
-    資料來源：行政院人事行政總處
-  </p>
+  <div id="calendar" class="rounded-2xl overflow-hidden"></div>
 </div>
 
 <script>
-  document.addEventListener('DOMContentLoaded', function () {
-    const calendarEl = document.getElementById('calendar');
+  document.addEventListener("DOMContentLoaded", function () {
+    const calendarEl = document.getElementById("calendar");
 
     const calendar = new FullCalendar.Calendar(calendarEl, {
-      initialView: 'dayGridMonth',
-      locale: 'zh-tw',
+      initialView: "dayGridMonth",
+      locale: "zh-tw",
       headerToolbar: {
-        left: 'prev,next today',
-        center: 'title',
-        right: ''
+        left: "prev,next today",
+        center: "title",
+        right: "",
       },
       events: [
-        { title: '元旦', start: '2025-01-01' },
-        { title: '春節', start: '2025-01-29', end: '2025-02-04' },
-        { title: '和平紀念日', start: '2025-02-28' },
-        { title: '兒童節／清明節', start: '2025-04-04', end: '2025-04-07' },
-        { title: '勞動節（部分行業）', start: '2025-05-01' },
-        { title: '端午節', start: '2025-05-31', end: '2025-06-03' },
-        { title: '中秋節', start: '2025-09-27', end: '2025-09-30' },
-        { title: '國慶日', start: '2025-10-10', end: '2025-10-13' }
-      ]
+        { title: "元旦", start: "2025-01-01" },
+        { title: "春節", start: "2025-01-29", end: "2025-02-04" },
+        { title: "和平紀念日", start: "2025-02-28" },
+        { title: "兒童節／清明節", start: "2025-04-04", end: "2025-04-07" },
+        { title: "勞動節", start: "2025-05-01" },
+        { title: "端午節", start: "2025-05-31", end: "2025-06-03" },
+        { title: "中秋節", start: "2025-09-27", end: "2025-09-30" },
+        { title: "國慶日", start: "2025-10-10", end: "2025-10-13" },
+      ],
     });
 
     calendar.render();
