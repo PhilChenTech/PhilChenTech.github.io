@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>2025 國定假日日曆</title>
+  <title>2025 假日日曆</title>
 
   <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -14,7 +14,7 @@
           colors: {
             appleBlack: "#121212",
             appleBlue: "#007aff",
-            appleGray: "#d1d1d1",
+            appleOrange: "#fb923c",
           },
           fontFamily: {
             sans: ["-apple-system", "BlinkMacSystemFont", "Helvetica Neue", "sans-serif"],
@@ -29,7 +29,6 @@
   <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.js"></script>
 
   <style>
-    /* 客製化 FullCalendar 字體與顏色 */
     .fc {
       font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", sans-serif;
       background-color: white;
@@ -44,11 +43,14 @@
     }
 
     .fc-daygrid-event {
-      background-color: #007aff !important;
       border: none;
       border-radius: 0.5rem;
       padding: 2px 6px;
       font-size: 0.75rem;
+    }
+
+    .fc-event-title {
+      white-space: nowrap;
     }
 
     .fc-col-header-cell-cushion {
@@ -60,16 +62,54 @@
 <body class="bg-gradient-to-b from-gray-100 to-gray-200 text-black min-h-screen flex items-center justify-center p-4">
 <div class="w-full max-w-5xl">
   <div class="text-center mb-6">
-    <h1 class="text-4xl font-semibold text-gray-900 tracking-tight">2025 中華民國國定假日</h1>
-    <p class="text-gray-500 mt-2 text-sm">資料來源：行政院人事行政總處</p>
+    <h1 class="text-4xl font-semibold text-gray-900 tracking-tight">2025 假日日曆</h1>
+    <p class="text-gray-500 mt-2 text-sm">國定假日、補假、週末皆有標示</p>
   </div>
 
   <div id="calendar" class="rounded-2xl overflow-hidden"></div>
 </div>
 
 <script>
+  // 自動標記每個週六與週日為背景假日
+  function addWeekendEvents(year) {
+    const weekends = [];
+    const start = new Date(`${year}-01-01`);
+    const end = new Date(`${year}-12-31`);
+    for (let d = new Date(start); d <= end; d.setDate(d.getDate() + 1)) {
+      const day = d.getDay();
+      if (day === 0 || day === 6) {
+        weekends.push({
+          title: "週末",
+          start: d.toISOString().split("T")[0],
+          display: "background",
+          backgroundColor: "#e0f2ff",
+        });
+      }
+    }
+    return weekends;
+  }
+
   document.addEventListener("DOMContentLoaded", function () {
     const calendarEl = document.getElementById("calendar");
+
+    const holidays = [
+      { title: "元旦", start: "2025-01-01", color: "#007aff" },
+      { title: "彈性休假", start: "2025-01-27", color: "#fb923c" },
+      { title: "除夕", start: "2025-01-28", color: "#007aff" },
+      { title: "春節", start: "2025-01-29", end: "2025-01-31", color: "#007aff" },
+      { title: "和平紀念日", start: "2025-02-28", color: "#007aff" },
+      { title: "補假", start: "2025-04-03", color: "#fb923c" },
+      { title: "兒童節／清明節", start: "2025-04-04", color: "#007aff" },
+      { title: "補假", start: "2025-05-30", color: "#fb923c" },
+      { title: "端午節", start: "2025-05-31", color: "#007aff" },
+      { title: "補假", start: "2025-09-28", color: "#fb923c" },
+      { title: "孔子誕辰紀念日", start: "2025-09-29", color: "#007aff" },
+      { title: "中秋節", start: "2025-10-06", color: "#007aff" },
+      { title: "國慶日", start: "2025-10-10", color: "#007aff" },
+      { title: "補假", start: "2025-10-24", color: "#fb923c" },
+      { title: "台灣光復", start: "2025-10-25", color: "#007aff" },
+      { title: "行憲紀念日", start: "2025-12-25", color: "#007aff" }
+    ];
 
     const calendar = new FullCalendar.Calendar(calendarEl, {
       initialView: "dayGridMonth",
@@ -80,21 +120,8 @@
         right: "",
       },
       events: [
-        { title: "元旦", start: "2025-01-01" },
-        { title: "彈性休假", start: "2025-01-27", end: "2025-01-27" },
-        { title: "除夕", start: "2025-01-28", end: "2025-01-28" },
-        { title: "春節", start: "2025-01-29", end: "2025-01-31" },
-        { title: "和平紀念日", start: "2025-02-28" },
-        { title: "補假", start: "2025-04-03", end: "2025-04-03" },
-        { title: "兒童節／清明節", start: "2025-04-04", end: "2025-04-04" },
-        { title: "端午節", start: "2025-05-31", end: "2025-05-31" },
-        { title: "補假", start: "2025-09-28", end: "2025-09-28" },
-        { title: "孔子誕辰紀念日", start: "2025-09-29", end: "2025-09-29" },
-        { title: "中秋節", start: "2025-10-06", end: "2025-10-06" },
-        { title: "國慶日", start: "2025-10-10", end: "2025-10-10" },
-        { title: "補假", start: "2025-10-24", end: "2025-10-24" },
-        { title: "台灣光復", start: "2025-10-25", end: "2025-10-25" },
-        { title: "行憲紀念日", start: "2025-12-25", end: "2025-12-25" }
+        ...holidays,
+        ...addWeekendEvents(2025)
       ],
     });
 
