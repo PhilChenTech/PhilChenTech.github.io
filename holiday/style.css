@@ -1,0 +1,27 @@
+.fc {
+    font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", sans-serif;
+    background-color: white;
+    border-radius: 1rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.fc-toolbar-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #121212;
+}
+
+.fc-daygrid-event {
+    border: none;
+    border-radius: 0.5rem;
+    padding: 2px 6px;
+    font-size: 0.75rem;
+}
+
+.fc-event-title {
+    white-space: nowrap;
+}
+
+.fc-col-header-cell-cushion {
+    font-weight: 500;
+}
