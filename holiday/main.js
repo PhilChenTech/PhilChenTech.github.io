@@ -48,7 +48,8 @@ document.addEventListener("DOMContentLoaded", function () {
         },
         events: [
             ...holidays,
-            ...addWeekendEvents(2025)
+            ...addWeekendEvents(2025),
+            ...addWeekendEvents(2026)
         ],
     });
 
