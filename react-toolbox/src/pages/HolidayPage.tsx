@@ -6,9 +6,10 @@ import Layout from '../components/Layout/Layout';
 import './HolidayPage.css';
 
 interface HolidayEvent {
-  date: string;
+  start: string;
   title: string;
-  type: 'holiday' | 'weekend' | 'makeup';
+  isHoliday: boolean;
+  color: string;
 }
 
 const HolidayPage: React.FC = () => {
@@ -29,9 +30,10 @@ const HolidayPage: React.FC = () => {
           setHolidayData(combinedData);
           
           const calendarEvents = combinedData.map((holiday: HolidayEvent) => ({
-            date: holiday,
+            date: holiday.start,
             title: holiday.title,
-            type: holiday.isHoliday ? 'holiday' : 'weekend'
+            backgroundColor: holiday.color,
+            borderColor: holiday.color
           }));
           
           setEvents(calendarEvents);
@@ -61,14 +63,14 @@ const HolidayPage: React.FC = () => {
     ];
 
     holidays.forEach((holiday) => {
-      if (holiday.type === 'holiday') {
-        const date = holiday.date.replace(/-/g, '');
+      if (holiday.isHoliday) {
+        const date = holiday.start.replace(/-/g, '');
         icsLines.push(
           'BEGIN:VEVENT',
           `DTSTART;VALUE=DATE:${date}`,
           `DTEND;VALUE=DATE:${date}`,
           `SUMMARY:${holiday.title}`,
-          `UID:${holiday.date}-${holiday.title}@holiday-calendar`,
+          `UID:${holiday.start}-${holiday.title}@holiday-calendar`,
           'END:VEVENT'
         );
       }
