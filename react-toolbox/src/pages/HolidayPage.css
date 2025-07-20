@@ -1,0 +1,182 @@
+/* 全域設定 */
+:root {
+  --shadow-color: rgba(0, 0, 0, 0.1);
+  --border-radius: 1rem;
+  --transition-duration: 0.2s;
+  --apple-blue: #007aff;
+}
+
+.holiday-page {
+  max-width: 6xl;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+  background: linear-gradient(to bottom, #f7fafc, #edf2f7);
+  min-height: 100vh;
+}
+
+.holiday-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.holiday-title {
+  font-size: 2.25rem;
+  font-weight: bold;
+  color: #1a202c;
+  letter-spacing: -0.025em;
+  margin-bottom: 1rem;
+}
+
+.holiday-subtitle {
+  color: #4a5568;
+  font-size: 1rem;
+}
+
+.calendar-container {
+  background: white;
+  border-radius: var(--border-radius);
+  overflow: hidden;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
+              0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  margin-bottom: 2rem;
+}
+
+/* 日曆容器 */
+.fc {
+  font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", sans-serif;
+  background-color: white;
+  border-radius: var(--border-radius);
+  transition: transform var(--transition-duration) ease;
+}
+
+/* 工具列樣式 */
+.fc-toolbar-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #121212;
+  letter-spacing: -0.025em;
+}
+
+.fc-button {
+  transition: all var(--transition-duration) ease !important;
+}
+
+.fc-button:hover {
+  transform: translateY(-1px);
+}
+
+/* 日期格子樣式 */
+.fc-daygrid-day {
+  transition: background-color var(--transition-duration) ease;
+}
+
+.fc-daygrid-day:hover {
+  background-color: rgba(0, 0, 0, 0.02);
+}
+
+/* 事件樣式 */
+.fc-daygrid-event {
+  border: none;
+  border-radius: 0.5rem;
+  padding: 4px 8px;
+  font-size: 0.875rem;
+  transition: transform var(--transition-duration) ease;
+}
+
+.fc-daygrid-event:hover {
+  transform: translateY(-1px);
+}
+
+.fc-event-title {
+  white-space: nowrap;
+  font-weight: 500;
+}
+
+/* 假日類型樣式 */
+.holiday-holiday {
+  background-color: #f56565 !important;
+  border-color: #f56565 !important;
+}
+
+.holiday-weekend {
+  background-color: #90cdf4 !important;
+  border-color: #90cdf4 !important;
+}
+
+.holiday-makeup {
+  background-color: #fbb6ce !important;
+  border-color: #fbb6ce !important;
+}
+
+/* 表頭樣式 */
+.fc-col-header-cell-cushion {
+  font-weight: 500;
+  color: #4a5568;
+  padding: 1rem 0;
+}
+
+/* 今天日期高亮 */
+.fc-day-today {
+  background-color: rgba(0, 122, 255, 0.05) !important;
+}
+
+/* 匯出按鈕區域 */
+.export-section {
+  display: flex;
+  justify-content: center;
+  margin-top: 1.5rem;
+}
+
+.export-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background-color: var(--apple-blue);
+  color: white;
+  font-weight: 500;
+  padding: 0.75rem 2rem;
+  border-radius: 0.75rem;
+  border: none;
+  cursor: pointer;
+  transition: all var(--transition-duration) ease;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+              0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  transform: scale(1);
+}
+
+.export-button:hover {
+  background-color: #0051d5;
+  transform: scale(1.05);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
+              0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+.download-icon {
+  height: 1.25rem;
+  width: 1.25rem;
+}
+
+/* 響應式調整 */
+@media (max-width: 640px) {
+  .holiday-page {
+    padding: 1rem 0.5rem;
+  }
+  
+  .holiday-title {
+    font-size: 1.875rem;
+  }
+  
+  .fc-toolbar-title {
+    font-size: 1.25rem;
+  }
+  
+  .fc-daygrid-event {
+    font-size: 0.75rem;
+    padding: 2px 6px;
+  }
+  
+  .export-button {
+    padding: 0.5rem 1.5rem;
+    font-size: 0.875rem;
+  }
+}
