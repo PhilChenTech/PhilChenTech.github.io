@@ -29,10 +29,9 @@ const HolidayPage: React.FC = () => {
           setHolidayData(combinedData);
           
           const calendarEvents = combinedData.map((holiday: HolidayEvent) => ({
+            date: holiday,
             title: holiday.title,
-            date: holiday.date,
-            className: `holiday-${holiday.type}`,
-            allDay: true
+            type: holiday.isHoliday ? 'holiday' : 'weekend'
           }));
           
           setEvents(calendarEvents);
