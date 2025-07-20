@@ -1,182 +1,308 @@
-/* 全域設定 */
-:root {
-  --shadow-color: rgba(0, 0, 0, 0.1);
-  --border-radius: 1rem;
-  --transition-duration: 0.2s;
-  --apple-blue: #007aff;
+/* 日曆頁面特定變數 */
+.holiday-page {
+  --holiday-red: #ff3b30;
+  --holiday-blue: #007aff;
+  --weekend-blue: #34c759;
+  --makeup-orange: #ff9500;
+  --today-bg: rgba(0, 122, 255, 0.08);
 }
 
 .holiday-page {
-  max-width: 6xl;
+  max-width: 1200px;
   margin: 0 auto;
-  padding: 2rem 1rem;
-  background: linear-gradient(to bottom, #f7fafc, #edf2f7);
+  padding: 0;
   min-height: 100vh;
 }
 
 .holiday-header {
   text-align: center;
-  margin-bottom: 2rem;
+  margin-bottom: 3rem;
+  padding: 2rem 0;
+  background: linear-gradient(135deg, var(--holiday-blue) 0%, var(--primary-hover) 100%);
+  color: white;
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow-lg);
+  position: relative;
+  overflow: hidden;
+}
+
+.holiday-header::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="20" cy="20" r="2" fill="rgba(255,255,255,0.1)"/><circle cx="80" cy="80" r="2" fill="rgba(255,255,255,0.1)"/><circle cx="40" cy="60" r="1" fill="rgba(255,255,255,0.05)"/><circle cx="70" cy="30" r="1.5" fill="rgba(255,255,255,0.08)"/></svg>');
+  pointer-events: none;
 }
 
 .holiday-title {
-  font-size: 2.25rem;
-  font-weight: bold;
-  color: #1a202c;
-  letter-spacing: -0.025em;
-  margin-bottom: 1rem;
+  font-size: 2.75rem;
+  font-weight: 800;
+  color: white;
+  letter-spacing: -0.02em;
+  margin-bottom: 0.5rem;
+  position: relative;
+  z-index: 1;
 }
 
 .holiday-subtitle {
-  color: #4a5568;
-  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 1.125rem;
+  font-weight: 400;
+  position: relative;
+  z-index: 1;
 }
 
 .calendar-container {
-  background: white;
+  background: var(--background-white);
   border-radius: var(--border-radius);
   overflow: hidden;
-  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
-              0 4px 6px -2px rgba(0, 0, 0, 0.05);
-  margin-bottom: 2rem;
+  box-shadow: var(--shadow-lg);
+  margin-bottom: 3rem;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(20px);
+  position: relative;
 }
 
 /* 日曆容器 */
 .fc {
-  font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", sans-serif;
-  background-color: white;
-  border-radius: var(--border-radius);
-  transition: transform var(--transition-duration) ease;
+  font-family: inherit;
+  background-color: transparent;
+  border: none;
 }
 
 /* 工具列樣式 */
+.fc-toolbar {
+  padding: 1.5rem 1.5rem 1rem;
+  border-bottom: 1px solid var(--border-color);
+  background: linear-gradient(to right, #fafafa, #ffffff);
+}
+
 .fc-toolbar-title {
-  font-size: 1.5rem;
-  font-weight: 600;
-  color: #121212;
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: var(--text-primary);
   letter-spacing: -0.025em;
 }
 
 .fc-button {
-  transition: all var(--transition-duration) ease !important;
+  transition: var(--transition) !important;
+  border-radius: var(--border-radius-sm) !important;
+  border: 1px solid var(--border-color) !important;
+  background: var(--background-white) !important;
+  color: var(--text-primary) !important;
+  font-weight: 500 !important;
+  box-shadow: var(--shadow-sm) !important;
 }
 
 .fc-button:hover {
+  background: var(--primary-color) !important;
+  color: white !important;
+  border-color: var(--primary-color) !important;
   transform: translateY(-1px);
+  box-shadow: var(--shadow-md) !important;
+}
+
+.fc-button:focus {
+  box-shadow: 0 0 0 3px rgba(0, 122, 255, 0.2) !important;
+}
+
+.fc-button-active,
+.fc-button-active:hover {
+  background: var(--primary-color) !important;
+  border-color: var(--primary-color) !important;
+  color: white !important;
 }
 
 /* 日期格子樣式 */
 .fc-daygrid-day {
-  transition: background-color var(--transition-duration) ease;
+  transition: var(--transition);
+  border-color: var(--border-color) !important;
 }
 
 .fc-daygrid-day:hover {
-  background-color: rgba(0, 0, 0, 0.02);
+  background-color: rgba(0, 122, 255, 0.02);
+}
+
+.fc-daygrid-day-number {
+  color: var(--text-primary);
+  font-weight: 500;
+  padding: 0.5rem;
 }
 
 /* 事件樣式 */
 .fc-daygrid-event {
-  border: none;
-  border-radius: 0.5rem;
-  padding: 4px 8px;
-  font-size: 0.875rem;
-  transition: transform var(--transition-duration) ease;
+  border: none !important;
+  border-radius: 6px !important;
+  padding: 3px 8px !important;
+  font-size: 0.8rem !important;
+  font-weight: 600 !important;
+  transition: var(--transition) !important;
+  margin: 1px !important;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1) !important;
 }
 
 .fc-daygrid-event:hover {
-  transform: translateY(-1px);
+  transform: translateY(-1px) !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15) !important;
 }
 
 .fc-event-title {
-  white-space: nowrap;
-  font-weight: 500;
+  font-weight: 600 !important;
+  font-size: 0.8rem !important;
 }
 
-/* 假日類型樣式 */
-.holiday-holiday {
-  background-color: #f56565 !important;
-  border-color: #f56565 !important;
-}
-
-.holiday-weekend {
-  background-color: #90cdf4 !important;
-  border-color: #90cdf4 !important;
-}
-
-.holiday-makeup {
-  background-color: #fbb6ce !important;
-  border-color: #fbb6ce !important;
-}
+/* FullCalendar 事件顏色會自動從 backgroundColor 設定 */
 
 /* 表頭樣式 */
+.fc-col-header {
+  background: linear-gradient(to bottom, #f8fafc, #ffffff);
+  border-bottom: 2px solid var(--border-color);
+}
+
 .fc-col-header-cell-cushion {
-  font-weight: 500;
-  color: #4a5568;
+  font-weight: 600;
+  color: var(--text-secondary);
   padding: 1rem 0;
+  font-size: 0.875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
 }
 
 /* 今天日期高亮 */
 .fc-day-today {
-  background-color: rgba(0, 122, 255, 0.05) !important;
+  background-color: var(--today-bg) !important;
+  position: relative;
+}
+
+.fc-day-today .fc-daygrid-day-number {
+  background: var(--primary-color);
+  color: white;
+  border-radius: 50%;
+  width: 2rem;
+  height: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0.25rem;
+  font-weight: 600;
 }
 
 /* 匯出按鈕區域 */
 .export-section {
   display: flex;
   justify-content: center;
-  margin-top: 1.5rem;
+  margin-top: 2rem;
+  padding: 2rem 0;
 }
 
 .export-button {
   display: inline-flex;
   align-items: center;
-  gap: 0.5rem;
-  background-color: var(--apple-blue);
+  gap: 0.75rem;
+  background: linear-gradient(135deg, var(--holiday-blue) 0%, var(--primary-hover) 100%);
   color: white;
-  font-weight: 500;
-  padding: 0.75rem 2rem;
-  border-radius: 0.75rem;
+  font-weight: 600;
+  padding: 1rem 2.5rem;
+  border-radius: var(--border-radius);
   border: none;
   cursor: pointer;
-  transition: all var(--transition-duration) ease;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
-              0 2px 4px -1px rgba(0, 0, 0, 0.06);
-  transform: scale(1);
+  transition: var(--transition);
+  box-shadow: var(--shadow-lg);
+  font-size: 1.1rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.export-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s;
+}
+
+.export-button:hover::before {
+  left: 100%;
 }
 
 .export-button:hover {
-  background-color: #0051d5;
-  transform: scale(1.05);
-  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
-              0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  transform: translateY(-2px);
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+.export-button:active {
+  transform: translateY(0);
 }
 
 .download-icon {
-  height: 1.25rem;
-  width: 1.25rem;
+  height: 1.5rem;
+  width: 1.5rem;
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.1));
 }
 
 /* 響應式調整 */
-@media (max-width: 640px) {
-  .holiday-page {
-    padding: 1rem 0.5rem;
+@media (max-width: 768px) {
+  .holiday-header {
+    margin-bottom: 2rem;
+    padding: 1.5rem 1rem;
   }
   
   .holiday-title {
-    font-size: 1.875rem;
+    font-size: 2rem;
+  }
+  
+  .holiday-subtitle {
+    font-size: 1rem;
+  }
+  
+  .fc-toolbar {
+    padding: 1rem;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .fc-toolbar-title {
+    font-size: 1.5rem;
+  }
+  
+  .fc-daygrid-event {
+    font-size: 0.7rem !important;
+    padding: 2px 4px !important;
+  }
+  
+  .export-button {
+    padding: 0.875rem 2rem;
+    font-size: 1rem;
+  }
+  
+  .download-icon {
+    height: 1.25rem;
+    width: 1.25rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .holiday-title {
+    font-size: 1.75rem;
   }
   
   .fc-toolbar-title {
     font-size: 1.25rem;
   }
   
-  .fc-daygrid-event {
-    font-size: 0.75rem;
-    padding: 2px 6px;
+  .fc-button {
+    padding: 0.5rem 0.75rem !important;
+    font-size: 0.875rem !important;
   }
   
   .export-button {
-    padding: 0.5rem 1.5rem;
-    font-size: 0.875rem;
+    padding: 0.75rem 1.5rem;
+    font-size: 0.95rem;
   }
 }
